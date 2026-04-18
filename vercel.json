@@ -1,0 +1,10 @@
+{
+  "public": true,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/vite-project/$1"
+    }
+  ],
+  "cleanUrls": true
+}
