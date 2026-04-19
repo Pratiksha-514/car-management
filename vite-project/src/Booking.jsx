@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import API_BASE_URL from "./apiConfig";
 
 function Booking({ user }) {
   const location = useLocation();
@@ -40,7 +41,8 @@ function Booking({ user }) {
     }
 
     try {
-      const res = await fetch("http://localhost:8082/bookings", {
+      const res = await fetch(`${API_BASE_URL}/bookings`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",

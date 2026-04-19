@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "./apiConfig";
 
 function Profile({ user }) {
   const [orders, setOrders] = useState([]);
@@ -17,7 +18,8 @@ function Profile({ user }) {
       return;
     }
 
-    fetch(`http://localhost:8082/bookings/user/${user.email}`)
+    fetch(`${API_BASE_URL}/bookings/user/${user.email}`)
+
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);

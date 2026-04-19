@@ -7,6 +7,7 @@ import Register from "./Register";
 import AdminDashboard from "./AdminDashboard";
 import Cart from "./Cart";
 import Profile from "./Profile";
+import API_BASE_URL from "./apiConfig";
 
 function App() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function App() {
 
   // Fetch cars
   const fetchCars = () => {
-    fetch("http://localhost:8082/cars")
+    fetch(`${API_BASE_URL}/cars`)
       .then((res) => res.json())
       .then((data) => setCars(data))
       .catch(err => console.error("Error fetching cars:", err));
@@ -69,8 +70,8 @@ function App() {
     if (!isAdmin) return;
 
     const url = editId
-      ? `http://localhost:8082/cars/${editId}`
-      : "http://localhost:8082/cars";
+      ? `${API_BASE_URL}/cars/${editId}`
+      : `${API_BASE_URL}/cars`;
 
     const method = editId ? "PUT" : "POST";
 
@@ -93,7 +94,7 @@ function App() {
 
   const deleteCar = (id) => {
     if (!isAdmin) return;
-    fetch(`http://localhost:8082/cars/${id}`, {
+    fetch(`${API_BASE_URL}/cars/${id}`, {
       method: "DELETE",
     }).then(() => fetchCars());
   };

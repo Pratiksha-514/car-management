@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "./apiConfig";
 
 function AdminDashboard({ cars, fetchCars, deleteCar, editCar }) {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function AdminDashboard({ cars, fetchCars, deleteCar, editCar }) {
   const [activeTab, setActiveTab] = useState("bookings"); // "bookings" or "inventory"
 
   const fetchBookings = () => {
-    fetch("http://localhost:8082/bookings")
+    fetch(`${API_BASE_URL}/bookings`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch(err => console.error("Error fetching bookings:", err));
@@ -18,7 +19,7 @@ function AdminDashboard({ cars, fetchCars, deleteCar, editCar }) {
   }, []);
 
   const updateBookingStatus = (id, status) => {
-    fetch(`http://localhost:8082/bookings/${id}/status`, {
+    fetch(`${API_BASE_URL}/bookings/${id}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(status),
@@ -29,13 +30,13 @@ function AdminDashboard({ cars, fetchCars, deleteCar, editCar }) {
   };
 
   const toggleAvailability = (carId) => {
-    fetch(`http://localhost:8082/cars/${carId}/availability`, {
+    fetch(`${API_BASE_URL}/cars/${carId}/availability`, {
       method: "PATCH",
     }).then(() => fetchCars());
   };
 
   const deleteBooking = (id) => {
-    fetch(`http://localhost:8082/bookings/${id}`, {
+    fetch(`${API_BASE_URL}/bookings/${id}`, {
       method: "DELETE",
     }).then(() => {
       fetchBookings();
